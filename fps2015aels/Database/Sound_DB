@@ -1,0 +1,4 @@
+#ID	TYPE(musique(mp3) = 0/bruitage(wav) = 1)	FILE
+1	0	./../Resources/Sounds/DRS.mp3
+2	1	./../Resources/Sounds/test.wav
+3	1	./../Resources/Sounds/Gun_Reload.wav

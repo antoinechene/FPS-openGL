@@ -1,0 +1,5 @@
+2012-03-24	Premiere version stable de la lib.
+		Basee sur sur SDL, elle a ete portee vers OGL.
+		Du coup, une partie des Drawables et des outils se sont fait jeter.
+		Neanmoins, 2 sont arrives! Dites bonjour a Select et Table!
+		Ce sera tout, car Benben vient me deranger!

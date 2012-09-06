@@ -1,0 +1,33 @@
+Physic engine (nanou)
+	Octree			Done 
+	Force			Done 
+	Colisions		Pending
+
+Graphic engine	
+	2D Tools		Pending (toitoine)
+	Characters meshes	done (fab)
+	Weapons meshes		done (fab)
+	Map meshes		done (fab)
+	Shader			Pending	(fab)
+	Ombre			Pending (fab)
+	Particule		Pending	(Nanou & lele)
+	Texure			not Done
+
+Sound engine	(toitoine)
+	Play music		done
+	Play sounds effects	done
+
+Game Engine	(Antoine)
+	Characters classes	done
+	Weapons classes		done
+	Map classes		done (fab)
+
+launcher
+	menu	not done (toitoine)
+Game 
+	player	done (toitoine)	done
+	game	done (fab)	done
+
+
+Network Engine			first step done (by lele)
+	Protocole			started (on stand by)

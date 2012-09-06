@@ -1,0 +1,280 @@
+2012-01-15	Oh putin ça fait longtemps, mais c'est reparti pour une couche sur la nouvelle lib
+		2012 !!
+		Chers auditeurs, lecteurs, regardeurs, toucheurs.
+		La version estampillée 2012-01-15 ne fait pas office de version 2.O ou autre
+		connerie de ce genre, elle garde toujours le chemin de la stabilité! Tiens, ca
+		devrait etre un mot qu'on devrait utiliser en politique...
+		Il y a eu tellement de corrections un peu partout, que je suis à peine capable
+		d'en restituer quelques-unes.
+		Bogues réglés:
+		- Quand on supprime un object Drawable, il se retirera automatiquement du focus ou
+		enter Window. Cela provoquait inévitablement un segfault.
+		Il y en a une pléthore encore, mais je m'en souviens plus...
+		Ajout:
+		- Ajout d'une nouvelle propriété appelée Abstract Parent. Cette propriété permet de
+		gagner en performance, grâce à son état abstrait de parent, il n'est qu'un symbole
+		qui lie son parent à ses enfants sans être visible. Dans l'état concret des choses,
+		les enfants se blitteront directement sur leur grand-parent, mais gardent les
+		propriétés de Enable, OnScreen et Event de son parent.
+		- La Textbox possède une petite barre de focus si mes souvenirs sont bons...
+		Bogues connus:
+		- Le Color est mal géré... Il faudrait que je change tout en un coup pour s'en
+		débarraser.
+
+2011-09-28	Quelques petits réglages depuis l'ancienne version.
+		Le bug à l'ajout d'un Label dans Button_Label est réglé.
+		AddChild et DelChild invalident leur élément correctement.
+		Textbox ne gère plus son contenu par un vector de char, mais directement par un
+		char*, question de perf. Son affichage est dorénavant centré.
+		Textarea a été supprimé, c'était une pâle copie de Textbox sans aucune différence.
+		Il sera réintégré plus tard mais avec ses vraies fonctions.
+
+2011-09-23	2 nouveaux evenements sont maintenant pris en charge, Enter et Leave.
+		Ils sont appelés lors de l'utilisation de l'evenement Motion.
+		Legere optimisation pour les evenements FocusEnter et FocusLeave.
+		Auparavant, lors d'un ClickDown, le focus etait automatiquement retire et envoye
+		meme si c'etait le meme Drawable. Maintenant, il n'envoie rien du tout si c'est
+		le meme. C'est pareil pour les evenements Enter et Leave.
+		La v2011.09.23.10 passe en version stable. Moins de leak, pas de segfault depuis
+		longtemps, on voit que la version est devenue plus robuste, on peut donc l'utiliser
+		sans crainte.
+		Amelioration du Makefile, il utilise maintenant clang++, ce qui nous fait perdre en
+		temps de compilation mais qui genere une lib beaucoup plus petite.
+		Ajout de l'option "prod" qui permet de creer le .a et son .h et de tout nettoyer.
+		Derniers ajouts de la journee, les fichiers Events de Control, Drawable et Window
+		ont ete purges. SetColorKey a ete ajoute a Surface, ca lui permet de pouvoir gerer
+		une couleur en transparence. La gestion du Focus et Enter/Leave ont ete amelioree
+		(2 fois en une journee quand meme).
+
+2011-09-22	Nouvelle cure d'amincissement, mieux que Weight Watchers.
+		Cette fois-ci ce sont les leaks qui prennent chers! De tout ce que j'ai pu voir,
+		j'en ai corrigé un maximum, les leaks sont maintenant moins nombreux.
+		Ajout de _bgRect dans la Window, permet de gérer le background en mode plus
+		avance.
+
+2011-09-19	Correction de quelques bugs:
+		- Propagation d'un event avec une position relative.
+		- Rajout du check isInvalidate dans la window (Amelioration de l'optim)
+		- Le vecteur d'Event* utilise dans le Wrapper_Event a ete change en pointeur sur
+		Event. Ca causait de tres gros SegFault... Je me demande meme, si j'ai vraiment
+		corrige le probleme ou juste mis un gros pansement...
+		Des modifications mineures un peu partout pour plus de stabilite.
+
+2011-09-18	Derniers changements majeurs de la librairie.
+		Les Menubar et les Menu ont ete ameliorees et stabilisees, Menu possede un nouvel
+		event nomme ActionEvent, c'est lui qui se fera appeler sur appel d'un ClickDown.
+		Les Menu se deroulent et et s'enroulent sans probleme (Je n'ai pas vu d'autre bug
+		encore.).
+		Textbox recoit une nouvelle propriete, le __maxLength. Permet de mettre une limite
+		au Textbox, aussi simple que ca.
+		C'est la derniere version, plus aucun ajout majeur ne viendra par la suite, sauf
+		en cas de force majeur. Je vous laisse vous amusez avec la v2011-09-18.6 pour le
+		moment...
+
+2011-09-16	Et paf! Tout l'écosystème de Window a été remodelé pour intégrer plus
+		naturellement les Menubar et les Menu. La Window prend son rôle de Window plus
+		sérieusement, elle gourverne du haut de son rang son remplaçant le mainControl
+		et les Menubar. Le mainControl est le conteneur direct de ce que le développeur
+		produit, les Menubar sont des objets plus haut classé (équivalent League Maitre
+		de Starcraft 2). Cette séparation du pouvoir est la clé pour jouïr d'une plus
+		grande modularité avec le foreground & le background.
+		Ainsi, grâce à ce changement fondamental, la classe Menubar et son petit frère
+		le Menu viennent au monde en même temps. Les développeurs GPP ont été audacieux!
+		De leur audace a été engendré non pas de simple Menubar et Menu ne pouvant
+		s'afficher que d'une manière, mais des Menubar et Menu modulaires à souhait!
+		Derrière ce travail herculéen, le jeune codeur sournoi Milkouille eut tenté de
+		s'envoyer une balle en argent traversé son encéphale pour mettre fin à ce supplice
+		des plus démoniaques, mais malheureusement, la balle n'y fut pas parvenu...
+		Redoublant de courage, il continua sa mission, jusqu'au moment où Kri5 le plus beau
+		des vikings lui annonça que la tâche sera rude, que la récompense est à la
+		hauteur du travail de ce que les tomates cerises sont à l'apéritif! (Comment ça y'a
+		pas de sens?) Que pensera WarBenny de cette nouvelle arme de guerre? Serait-ce assez
+		pour contenter son appétit macabre de nous faire mériter moins de 0?
+		Enfin, le mission fut accompli, mieux encore, c'est un "one shoot" qui vient d'être
+		établi.
+		Nul ne sait la signification de cet adage mystérieux et encore moins de ce que le
+		Vietnamien pense.
+
+2011-09-15	Aucune nouveauté pour le moment, mais la librairie va prendre un sérieux coup
+		de scalpel. Menubar au menu, suivis d'assortiments Textbox et Textarea, pour
+		le dessert des barres de défilement (Si on est chaud =D).
+
+2011-09-13	La nouvelle version continue de se stabiliser, mais comporte tout de même
+		une grande liste de nouveautés.
+		Après 1 jour et demi de débug, le Button_Label est /!\vraiment/!\ corrigé.
+		Satané rect de merde... Qui est le trou du cul qui a mis l'offset (de type
+		Rect) en argument du BlitParent?
+		Ajout d'un vrai rect* visibleRect à Drawable, son setteur et getteur vont avec.
+		Correction de quelques leaks et bugs un peu partout dans ce foutoir.
+		La classe Textbox marche, même très bien.
+		La gestion du clavier a été confiée à la classe Keyboard_Manager. Elle gèrera
+		l'écriture par le clavier et la lecture par le clavier. Par exemple si on appuie
+		sur backslash, en mode écriture le dernier caractère sera supprimé, en mode
+		lecture un mot spécial sera ajouté. Pour le moment, Keyboard_Manager ne gère que
+		les lettres normales, il faudra l'améliorer en mappant toutes les lettres du
+		clavier anglais, et ensuite le reste.
+		La gestion du focus a été créé, c'est la classe Window qui s'en charge avec
+		l'appel des fonctions SetDrawableFocused et GetDrawableFocused. Lorsque le
+		setteur est appelé, il envoie l'évènement EVENT_FOCUS_ENTER pour le nouveau
+		Drawable et EVENT_FOCUS_LEAVE pour l'ancien Drawable.
+		Par défaut, à l'appel de l'évènement EVENT_CLICK_DOWN sur Window, le focus est
+		remis à NULL et l'évènement EVENT_FOCUS_LEAVE est envoyé au besoin.
+		Les évènements EVENT_KEY_DOWN et EVENT_KEY_UP ont été totalement revus.
+		Il y a maintenant 2 chemins possibles pour récupérer un évènement du clavier.
+		Tout d'abord, le Drawable qui détient le focus reçoit l'évènement en premier,
+		ensuite ce sont les Controls globaux. Pour les obtenir, les fonctions
+		SetCbKeyDown et SetCbKeyUp se voient ajouter un dernier argument de type bool.
+		Celui-ci, si mis à true, permet de les ajouter à la liste des évènements globaux
+		qui sont stockés dans le Wrapper_Event. Ainsi, on peut écrire dans un Textbox et
+		en même temps avoir ses raccourcis toujours actifs.
+
+2011-09-12	La v2011-09-13.4 n'évolue pas beaucoup, elle se stabilise.
+		La Textbox n'a pas été testé, mais elle est presque prête à l'emploi. La classe
+		Textarea a été créée, mais elle ne possède rien de plus que la Textbox.
+		Correction du Label qui sautait depuis la v2011-09-10.2 je crois.
+		Les events EnableChange et ScreenChange sont maintenant pris en charge par
+		Drawable et Window. Ils sont envoyés sur appel de la fonction SetEnable
+		et SetOnScreen.
+		Les wrappers sont mieux détruis qu'avant. Ces Singletons n'étaient jamais Kill...
+		Correction de Drawable qui supprimait sont bgSurface, dorénavant il ne le
+		fera plus. C'est le développeur qui décide ou non la suppression en mémoire de
+		sa bgSurface.
+
+2011-09-11	Le 11 Septembre est passé, ouf! Enfin! Non je blague, on s'en fou.
+		La classe Textbox voit le jour, elle permet d'écrire du textes aussi simplement
+		que ça. Plus tard, la gestion du focus devra être codée pour gérer les Textbox.
+		Toutes les assignations de _isInvalidate et _onScreen sont été remplacées par
+		leur setter respectifs. On ne doit jamais touché à la variable directement, sauf
+		cas particulier ou si on sait ce qu'on fait. Un point négatif de l'ancienne
+		version qui se voit donc calciné! Ouaip, rien que ça.
+		La classe Font se voit doté d'une fonction qui permet de connaitre la taille
+		en pixel d'une chaine en LATIN1. Il y a de fortes probabilitées que Font
+		ne s'arrête pas là et qu'elle grandira dans les prochaines jours.
+
+2011-09-10	De lourds changement à l'horizon!
+		La librairie est considérée comme stable, j'ai commencé une nouvelle version avec
+		de gros changements et améliorations de prévues.
+		Tout d'abord, la librairie change de nom, elle ne doit plus s'appeller ID_API,
+		mais ID_glibrary pour graphic library. "Du point de vue technique une API
+		est un ensemble de fonctions, procédures ou classes mises à disposition par une
+		bibliothèque logicielle, un système d'exploitation ou un service." from Wiki
+		C'est bien là le truc incohérent, "mises à disposition par une bibliothèque
+		logicielle", la bibliothèque logicielle ("library" en anglais) c'est ce que nous
+		sommes en train de développer. La définition s'y approche, mais la
+		bibliothèque logicielle colle mieux à ce que nous faisons.
+		Un dossier a été créer dans ~nguyen_m/ID_glibrary, vos droits sont à "l" via
+		le FS. Par mesure de sécurité je préfère ne laisser que la lecture, aucun
+		changement ne doit s'effectuer sur les dossiers de sauvegardes.
+		Je vais garder une trace de chaque version que nous allons développer au fil du
+		temps, chaque version aura son dossier nommé par le numéro de version et se
+		finissant par un adjectif qualifiant le statut de la librarie. Grâce à ça,
+		nous pourrons garder une trace de nos changements. Si un problème survient,
+		nous serons capable de remonter les versions antérieurs pour trouver depuis quand
+		le problème s'était installé et peut-être trouver le coupable...
+		Donc, la v2011_09_09.1 est dite stable, elle reste très basique et comporte
+		quelques incohérences, mais reste suffisante pour le développement du taquin,
+		qui je le rappelle, ne nécessite pas grand chose pour marcher.
+		La version v2011_09_10.2 s'est vue ajouté les fonctions de Window Management de
+		la SDL, qui servent à changer le titre, minimiser la fenêtre, mettre une icone,
+		switcher entre le pleine écran ou non.
+		La classe Font passe au bloc et change complètement son mode de fonctionnement,
+		elle est devenue Singleton et les polices sont désormais stockées dans un vector.
+		Ce qui implique que chaque police se verra charger une fois seulement. D'un point
+		de vue optim', c'est que du bon.
+		Les classes Label et Button_Label passe aussi par le petit scalpel, les
+		constructeurs changent un peu pour un souci de logique. Auparavant Label prenait,
+		dans ses arguments du constructeur, sa position par rapport à son parent,
+		une abbération pour la logique du cerveau. Comment peut-il déjà se placer, alors
+		qu'il n'a même pas encore de parent! O_O
+		Dernier changement, dorénavant, tous les drawables peuvent se positionner via
+		une position relative.
+		Il y a clairement un souci de logique qui s'était installé dans l'ancienne version,
+		essayons de corriger le tir et de repartir sur une base plus saine.
+		La prochaine version sera vraiment plus costaud, puisque je vais la nourrir
+		à la testostérone et aux protéines.
+
+2011-09-09	Ole ole!
+		Un seul probleme a ete remonte au core developpeur, le SetInvalidate de Window ne
+		mettait pas a jour la liste updateRects. Franchement, je m'attendais a plus que
+		ca comme bug, ca prouve qu'on code bien et que la librairie se stabilise.
+		Ca a aussi pour consequence de me faire moins ecrire dans le fichier de LOG...
+		Mais on est pas oblige d'avoir des choses a raconter pour ecrire dans ce fichier,
+		car de toute facon, il n'y a que moi qui ecrit dans ce fichier.
+		A la demande de celui-la meme qui a fait remonter le seul et l'unique bug (J'ai
+		eu l'idee avant bien sur! Mais je vais pas me manifester a moi-meme... Quel ego...
+		Mwarf!), j'ai ajoute une fonction dans le makefile (make ID_h) qui permet de creer
+		le fichier theLibrary.h avec tous les .h necessaires.
+		Regardez la commande, c'est fun.
+		Ajout de derniere minute, je viens de remarquer qu'il y avait 2 events repondant
+		aux noms de VisiblityChange et ScreenChange, un peu debile et redondant d'avoir
+		2 events d'affichages. Remplacement de Visilibity par Enable dans tous les fichiers.
+		Putin qu'est-ce qu'on est bon...
+
+2011-09-08	Ca fait longtemps, mais essayons de retrouver ce qui a ete fait depuis le temps.
+		Une grosse refonte de la la calotte gla... Euh non... de la pensee! Comment la
+		librairie se verra construite, c'est en ca que j'ai ecris le mot pensee.
+		Les methodes Event, Set, Get, On de Control, Drawable et Window ont ete finalisees.
+		Apres utilisation de l'API sur differents taquins, il a ete juge preferable de
+		defoncer la classe button. Ce qui aura pour consequence la naissance de Button
+		en version light, Button_Label et Button_Image. Ces nouveaux objets eponymes
+		ne feront qu'une et unique tache, les leur.
+		Creation de l'objet Container (Il etait temps!), il sera aussi simple d'utilisation
+		que leger. (Un peu trop a mon gout)
+		Ajout de la gestion du background pour Drawable.
+		Instauration du positionnement relatif avec X;Y ou avec REL_POS (Cf. Drawable.h).
+		Le Wrapper_Interface_SDL a ete ameliore, il ne fait que recevoir ce qu'il aurait du
+		recevoir un peu plus tot dans sa vie. En meme temps, c'est aussi les besoins des
+		Supers developpeurs de la GPP qui nous pousse a grossir les wrappers, c'etait aussi
+		inevitable que le cycle de la vie.
+		Bien sur, si le wrapper grandit, il en est de meme pour Surface, il prend du poids,
+		mais du bon poids!
+		Les fonctions d'initialisation ont ete ajoutees, elles se trouvent dans le fichier
+		ID_Master_FCT, si c'est pas un nom qui tape ca...
+		Des segfaults ont ete reperes et eradiques grace a la puissance de la GPP.
+		Sinon, ya Benben qui est en train de me regarder ecrire ces choses etonnantes de
+		la vie de notre ID_API.
+		A vous les studios!
+
+2011-08-29	Changement de :
+		-Control:
+			-Change du parent en Drawable.
+			-Ajout d'une seconde liste d'enfants (Drawable)
+			-Ajout de la methode add_child en Drawable.
+		-Drawable:
+			-Ajout des methodes get/set surface.
+			-Transformation de la methode DrawSurface.
+		-Button:
+			-Rajout des methodes pour gerer une image.
+		-Wrapper_Event_SDL:
+			-Reparation de la class, juste quelques broutilles qui ont change.
+		-Wrapper_Event_Template:
+			-Reparation de la class, pareil.
+		Un premier test a ete fait, les resultats sont pour l'instant concluant,
+		les wrappers sont bons, les events reagissent bien.
+
+2011-08-25	Les classes Wrapper_Interface et Surface ont ete terminees.
+		Changement du rm -rf *.o dans le Makefile par rm -f $(OBJ).
+		On peut commencer a construire les objets de la librairie.
+		Ajout des prototypes pour gerer la hierarchie entre objets.
+
+2011-08-23	Dossier nettoye et range.
+		IN_PROGRESS est le dossier en cours de travail.
+		SANDBOX est le dossier de test, de documentation, et tout ce qui ne va pas
+		dans TO_DO et IN_PROGRESS.
+		TO_DO est le dossier contenant tous les fichiers restants qu'il faudra implementer.
+
+2011-08-22	Les wrappers ont ete deplaces dans le dossier Wrapper/.
+		Fichier Surface.h construis, mais pas termine.
+		Surface.cpp est juste pre-code, il faut maintenant faire les fonctions.
+		Creation du fichier Common.h qui regroupera les structs et choses tres
+		ou trop utile pour le bon deroulement de la librairie.
+		Drawable a ete un peu continue.
+		Des que les wrappers seront finis, on pourra construire l'archi de la
+		librairie facilement, c'est-a-dire les objets et les heritiers, etc...
+
+2011-08-16	On a termine les fichiers du dossier Control/.
+		C'est-a-dire:
+		- les fonctions OnEvent ont ete faites.
+		- les setteur et getteur ont ete faits.
+		- les callbacks sont mis en place.
+		Un debut de wrapper a ete code, mais le resultat n'est pas probant.
